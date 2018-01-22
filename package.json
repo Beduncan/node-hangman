@@ -1,0 +1,23 @@
+{
+  "name": "node-hangman",
+  "version": "1.0.0",
+  "description": "node hangman game",
+  "main": "hangman.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Beduncan/node-hangman.git"
+  },
+  "author": "bryant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Beduncan/node-hangman/issues"
+  },
+  "homepage": "https://github.com/Beduncan/node-hangman#readme",
+  "dependencies": {
+    "inquirer": "^5.0.0",
+    "prompt": "^1.0.0"
+  }
+}
