@@ -1,60 +1,61 @@
 var prompt = require('prompt');
+var inquirer = require('inquirer')
 var Word = require('./words');
 
-console.log("Welcome to Car Hangman!!");
-console.log("Guess Letters to fill in the word");
-console.log("Guess them all right you win! Guess 8 letters wrong and you lose!");
-prompt.start();
 
-game = {
- wordbank = ['tessla', 'chevy', 'saab', 'honda', 'vovlo'],
- wins = 0,
- lose = 0,
- guessesL = [],
- guessesleft = 0,
- TheWord = null, 
+var wordBank = [
+	'tessla', 'dodge', 'ferrari', 'porsche', 'fiat', 'mclaren'
+];
+var guessesleft = 8;
+var lettersguessed = [];
+var currentword;
 
-  StartGame: function(wrd){
- 	this.reset();
- 	this.TheWord = new Word(this.wordbank[Math.floor(Math.random()* this.wordBank.length)]);
- 	this.TheWord.getletters();
- 	this.promptUser();
- },
+startgame();
 
- reset: function(){
- 	this.guessesleft = 8;
- },
+function startgame() {
+	console.log("-----------------------");
+	console.log("Welcome to The Car Brands Hangman game");
+	console.log("-----------------------");
+	console.log("Hit Enter to Play")
+	console.log("-----------------------");
+	console.log("Type Anything to Canel")
+	console.log("-----------------------");
 
-promptUser: function(){
-    prompt.get(['guessLetter'], function(err, result){
-      console.log("You guessed: " + result.Userguess);
-      var manyGuessed = self.TheWord.check(result.Userguess);
+	//empty letters guessed array
+	if(lettersguessed.length > 0){
+		lettersguessed = [];
+	}
+	inquirer.prompt([
+	{
+		name: 'game',
+		type: 'confrim',
+		message: 'Wanna Play a Game',
+	    default: true
 
-      if(manyGuessed ==0) {
-        console.log("WRONG");
-        this.guessesleft--;
-        
-      } else {
-        console.log("CORRECT");
-          if(this.TheWord.rightWord()){
-            console.log("You won!");
-            console.log("-------------------");
-            return;
-          }
-      }
+	}
+	]).then(function (answer){
+ 		if(answer.game){
+ 			console.log("You'll Have 8 Guesses");
+ 			console.log("Good Luck");
+ 			newGame();
+ 		}else{
+ 			console.log("bye-bye");
+ 		}
 
-      console.log("Guesses remaining: " + this.guessesleft);
-      console.log("-------------------");
-      if((this.guessesleft > 0) && (this.TheWord.Foundword == false)){
-        this.promptUser();
-      }
-      else if(this.guessesleft == 0){
-        console.log("Game over. Correct Word is", this.TheWord.picked);
-      } else {
-        console.log(this.TheWord.wordRender());
-      }
-    });
-
-  }
+	});
+ 		
 };
-game.StartGame();
+function ResetGame(){
+	if (guessesleft === 8) {
+		console.log("-----------------------");
+
+		//random number genterater 
+		var random = Math.floor(Math.random() * wordBank.letters)
+        currentWord = new Word(wordBank[randNum])
+        currentword.getletters();
+
+        //display word as _
+        console.log(currentword);
+
+	}
+};
