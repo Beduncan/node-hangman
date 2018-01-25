@@ -1,45 +1,47 @@
 // bring in the letter.js file 
 var Let = require('./letter.js');
-var t = this
 function Word(picked) {
-	t.picked = picked;
-	t.letters = [];
-	t.FoundWord = false;
-	t.getletters = function(){
-		for (var i = 0; i < t.picked.length; i++) {
-			this.letters.push(new Letter(this.picked[i]));
+	this.picked = picked;
+	this.letters = [];
+	this.FoundWord = false;
+	this.getLetter = function() {
+		for (var i = 0; i < this.picked.length; i++) {
+            var newLetter = new Let(this.picked[i]);
+            this.letters.push(newLetter);
 		}
 	};
-}; 
-//checks if user found right word 
-Word.prototype.check = function () {
-	if (t.letters.every(function (lett){
-		return lett.appear = true;
-	})){
-		t.FoundWord = true;
-		return true;
-	}
-};
+ 
+	//checks if user found right word 
+	this.checkW = function () {
+		if (this.letters.every(function (ltt){
+			return ltt.appear === true;
+		})){
+			this.FoundWord = true;
+			return true;
+		}
+	};
+};	
 //check if letter is in word 
-Word.prototype.checkLetter = function(Userguess){
+Word.prototype.checkLetter = function(userguess){
 	var returnthis = 0;
 	//goes through each letter to see if it's correct
-	t.letters.foreach(function (lett){
-		if (lett.letter === guessedLetter) {
-			lett.appear = true;
-			returnthis++
+	this.letters.forEach(function (ltt){
+		if (ltt.letter === userguess) {
+			ltt.appear = true;
+			returnthis++;
 		}
 	})
 	//if letter matched
 	return returnthis; 
 };
 Word.prototype.RenderWord = function(){
-	var display = "";
+	var display = " ";
 	//render based on letters found
-	t.letters.foreach(function(lett){
-		var CurrentLetter = lett.display();
+	this.letters.forEach(function(ltt){
+		var CurrentLetter = ltt.displayL();
 		display += CurrentLetter; 
 	})
 	return display;
 }
+
 module.exports = Word;
