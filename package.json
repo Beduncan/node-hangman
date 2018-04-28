@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/Beduncan/node-hangman#readme",
   "dependencies": {
+    "add": "^2.0.6",
     "inquirer": "^5.0.0",
+    "is-letter": "^1.1.1",
     "prompt": "^1.0.0"
   }
 }
